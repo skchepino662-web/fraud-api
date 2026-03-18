@@ -6,6 +6,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// 🔥 RUTA PARA PROBAR EN NAVEGADOR
+app.get('/', (req, res) => {
+  res.send('🚀 Fraud API funcionando');
+});
+
+app.get('/analyze', (req, res) => {
+  res.send('🧠 Endpoint listo para POST');
+});
+
+// 🧠 TU API REAL
 app.post("/analizar", (req, res) => {
   const { mensaje } = req.body;
   const resultado = analizarMensaje(mensaje);
