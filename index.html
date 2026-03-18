@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fraud Detector</title>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+
+  <h1>🧠 Detector de Fraude</h1>
+
+  <textarea id="mensaje" placeholder="Escribe el mensaje..." rows="5" cols="40"></textarea>
+  <br><br>
+
+  <button onclick="analizar()">Analizar</button>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+    async function analizar() {
+      const mensaje = document.getElementById("mensaje").value;
+
+      const res = await fetch("https://fraud-api-production-e80d.up.railway.app/analizar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ mensaje })
+      });
+
+      const data = await res.json();
+
+      document.getElementById("resultado").innerText =
+        "Nivel: " + data.nivel + " | Riesgo: " + data.riesgo;
+    }
+  </script>
+
+</body>
+</html>
